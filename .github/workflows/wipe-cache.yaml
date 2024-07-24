@@ -1,0 +1,13 @@
+name: Wipe all Github actions cache
+on:
+  workflow_dispatch:
+
+jobs:
+  wipe-cache:
+    name: Wipe cache
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Wipe cache
+        uses: easimon/wipe-cache@main
