@@ -42,14 +42,14 @@ The Talos image can be flashed on an SD card, a NVMe drive, or a SATA drive.
 You can download the latest image from the [releases page](https://github.com/si0ls/talos-orangepi5/releases).
 
 You can choose between the following images:
-- `talos-orangepi5.raw.xz`: the base image for **Orange Pi 5 (Plus)**, flashable on a **SD card, eMMC, M.2 NVMe drive, USB drive, or USB-connected SATA drive**
-- `talos-orangepi5-sata.raw.xz`: the base image for **Orange Pi 5 (Plus)** with SATA overlay applied, flashable on a **M.2 SATA drive**
+- `talos-orangepi5.raw.zst`: the base image for **Orange Pi 5 (Plus)**, flashable on a **SD card, eMMC, M.2 NVMe drive, USB drive, or USB-connected SATA drive**
+- `talos-orangepi5-sata.raw.zst`: the base image for **Orange Pi 5 (Plus)** with SATA overlay applied, flashable on a **M.2 SATA drive**
 
 The image can be flashed using [Etcher](https://www.balena.io/etcher/) on Windows, macOS, or Linux or using `dd` on Linux:
 
 ```bash
 # Extract the image for the variant you want to flash
-xz -d talos-orangepi5[-sata].raw.xz
+zstd -d talos-orangepi5[-sata].raw.zst
 
 # Flash the image
 # Replace /dev/sdX with the device of the SD card, NVMe drive, or SATA drive
