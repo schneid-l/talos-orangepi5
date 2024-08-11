@@ -67,6 +67,25 @@ The [release page](https://github.com/si0ls/talos-orangepi5/releases) provides t
 - `initramfs-metal-arm64.xz` (the initramfs)
 - `rk3588s-orangepi-5.dtb` and `rk3588-orangepi-5-plus.dtb` (the device tree blobs)
 
+## Machine configuration
+
+Use the `ghcr.io/si0ls/talos-orangepi5` images instead of the upstream Talos Linux images.
+
+```yaml
+machine:
+  install:
+    disk: /dev/sda # replace with the device you want to install Talos on
+    image: ghcr.io/si0ls/talos-orangepi5:v1.1
+    wipe: false
+```
+
+To upgrade you machine to the latest version with `talosctl`, you can use the following command:
+
+```bash
+talosctl upgrade --nodes <node-ip> \
+      --image ghcr.io/si0ls/talos-orangepi5:<version>
+```
+
 ## Build
 
 Clone the repository and build Talos Linux for Orange Pi 5:

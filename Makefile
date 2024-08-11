@@ -38,6 +38,10 @@ INSTALLER_OUTPUT_NAME ?= $(NAME)-installer
 INSTALLER_OUTPUT_TAG ?= $(TAG)
 INSTALLER_OUTPUT_IMAGE ?= $(REGISTRY_AND_USERNAME)/$(INSTALLER_OUTPUT_NAME):$(INSTALLER_OUTPUT_TAG)
 
+IMAGE_INSTALLER_NAME ?= $(NAME)
+IMAGE_INSTALLER_TAG ?= $(TAG)
+IMAGE_INSTALLER_IMAGE ?= $(REGISTRY_AND_USERNAME)/$(IMAGE_INSTALLER_NAME):$(IMAGE_INSTALLER_TAG)
+
 IMAGE_FILENAME ?= $(NAME)
 ifeq ($(SATA),yes)
 	IMAGE_FILENAME := $(IMAGE_FILENAME)-sata
@@ -46,7 +50,8 @@ endif
 IMAGE_OUTPUT_KIND ?= 
 IMAGE_KIND ?= metal
 IMAGE_EXTENSIONS :=
-IMAGER_ARGS := --arch=arm64
+IMAGER_ARGS ?= 
+IMAGER_ARGS += --arch=arm64
 IMAGER_ARGS += --overlay-name=orangepi-5
 IMAGER_ARGS += --overlay-image=$(INSTALLER_OUTPUT_IMAGE)
 IMAGER_ARGS += --output-kind=$(IMAGE_OUTPUT_KIND)
@@ -164,7 +169,7 @@ dt: $(ARTIFACTS_FOLDER)
 #	Images
 
 .PHONY: images
-images: images-metal image-pxe
+images: images-metal image-pxe image-installer
 
 .PHONY: image
 image: $(ARTIFACTS_FOLDER)
@@ -208,6 +213,15 @@ image-initramfs:
 	@$(MAKE) image \
 		IMAGE_KIND="iso" \
 		IMAGE_OUTPUT_KIND="initramfs"
+
+.PHONY: image-installer
+image-installer:
+	$(MAKE) image \
+		IMAGE_KIND="installer" \
+		IMAGER_ARGS="--base-installer-image=\"ghcr.io/siderolabs/installer:$(TALOS_VERSION)\"" && \
+		if $(PUSH); then \
+			crane push $(ARTIFACTS_FOLDER)/installer-arm64.tar $(IMAGE_INSTALLER_IMAGE); \
+		fi
 
 
 ###### Clean ######
