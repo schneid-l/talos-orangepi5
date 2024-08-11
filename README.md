@@ -69,13 +69,13 @@ The [release page](https://github.com/si0ls/talos-orangepi5/releases) provides t
 
 ## Machine configuration
 
-Use the `ghcr.io/si0ls/talos-orangepi5` images instead of the upstream Talos Linux images.
+Use the `ghcr.io/si0ls/talos-orangepi5` images instead of the upstream Talos Linux images. It also available with the SATA overlay with the `ghcr.io/si0ls/talos-orangepi5-sata` image.
 
 ```yaml
 machine:
   install:
     disk: /dev/sda # replace with the device you want to install Talos on
-    image: ghcr.io/si0ls/talos-orangepi5:v1.1
+    image: ghcr.io/si0ls/talos-orangepi5[-sata]:v1.1
     wipe: false
 ```
 
@@ -83,7 +83,7 @@ To upgrade you machine to the latest version with `talosctl`, you can use the fo
 
 ```bash
 talosctl upgrade --nodes <node-ip> \
-      --image ghcr.io/si0ls/talos-orangepi5:<version>
+      --image ghcr.io/si0ls/talos-orangepi5[-sata]:<version>
 ```
 
 ## Build

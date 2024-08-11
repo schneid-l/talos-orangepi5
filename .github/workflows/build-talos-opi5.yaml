@@ -242,7 +242,7 @@ jobs:
           name: image-pxe
           path: out/**/*
 
-  generate-image-installer:
+  generate-images-installer:
     name: Generate Talos Linux image installer for Orange Pi 5
     needs: [build-kernel, build-imager, build-installer]
     runs-on:
@@ -263,7 +263,7 @@ jobs:
 
       - name: Generate artifacts
         run: |
-          make image-installer ARTIFACTS=${{ github.workspace }}/out PUSH=true
+          make images-installer ARTIFACTS=${{ github.workspace }}/out PUSH=true
 
       - name: Push artifacts
         uses: actions/upload-artifact@v4
@@ -279,7 +279,7 @@ jobs:
         extract-devicetree,
         generate-images,
         generate-pxe,
-        generate-image-installer,
+        generate-images-installer,
       ]
     runs-on:
       - ubicloud-standard-2-arm

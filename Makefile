@@ -214,6 +214,9 @@ image-initramfs:
 		IMAGE_KIND="iso" \
 		IMAGE_OUTPUT_KIND="initramfs"
 
+.PHONY: images-installer
+images-installer: image-installer image-installer-sata
+
 .PHONY: image-installer
 image-installer:
 	$(MAKE) image \
@@ -223,6 +226,10 @@ image-installer:
 			crane push $(ARTIFACTS_FOLDER)/installer-arm64.tar $(IMAGE_INSTALLER_IMAGE); \
 		fi
 
+.PHONY: image-installer-sata
+image-installer-sata:
+	$(MAKE) image-installer \
+		SATA=yes
 
 ###### Clean ######
 
