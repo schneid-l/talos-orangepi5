@@ -12,17 +12,10 @@ RUN apk --no-cache add \
 
 ARG KERNEL_VERSION=6.10
 ARG KERNEL_SOURCE=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.10.tar.gz
-ARG KERNEL_PATCHES_DIR=./patches
 
 RUN mkdir -p /kernel/src && \
     mkdir -p /kernel/patches && \
     curl -L $KERNEL_SOURCE | tar -xz -C /kernel/src --strip-components=1
-
-COPY $KERNEL_PATCHES_DIR/* /kernel/patches/
-
-RUN for patch in /kernel/patches/*.patch; do \
-        patch -d /kernel/src -p1 < $patch; \
-    done
 
 FROM ubuntu:22.04 AS builder
 
@@ -80,14 +73,6 @@ RUN --mount=type=cache,target=/kernel/build \
     make -j$(nproc) modules && \
     make -j$(nproc) dtbs
 
-    RUN --mount=type=cache,target=/kernel/build \
-    fdtoverlay -o /kernel/build/arch/arm64/boot/dts/rockchip/rk3588s-orangepi-5-sata.dtb \
-        -i /kernel/build/arch/arm64/boot/dts/rockchip/rk3588s-orangepi-5.dtb \
-        /kernel/build/arch/arm64/boot/dts/rockchip/overlay/rockchip-rk3588-sata.dtbo && \
-    fdtoverlay -o /kernel/build/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus-sata.dtb \
-        -i /kernel/build/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus.dtb \
-        /kernel/build/arch/arm64/boot/dts/rockchip/overlay/rockchip-rk3588-sata.dtbo
-
 RUN --mount=type=cache,target=/kernel/build \
     mkdir -p /kernel/out/boot && \
     mkdir -p /kernel/out/dtb/rockchip/overlay && \
@@ -95,10 +80,7 @@ RUN --mount=type=cache,target=/kernel/build \
     cp -r /kernel/build/certs/signing_key.x509 /kernel/out/certs/signing_key.x509 && \
     cp -r /kernel/build/arch/arm64/boot/Image /kernel/out/boot/vmlinuz && \
     cp -r /kernel/build/arch/arm64/boot/dts/rockchip/rk3588s-orangepi-5.dtb /kernel/out/dtb/rockchip/ && \
-    cp -r /kernel/build/arch/arm64/boot/dts/rockchip/rk3588s-orangepi-5-sata.dtb /kernel/out/dtb/rockchip/ && \
     cp -r /kernel/build/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus.dtb /kernel/out/dtb/rockchip/ && \
-    cp -r /kernel/build/arch/arm64/boot/dts/rockchip/rk3588-orangepi-5-plus-sata.dtb /kernel/out/dtb/rockchip/ && \
-    cp -r /kernel/build/arch/arm64/boot/dts/rockchip/overlay/rockchip-rk3588-sata.dtbo /kernel/out/dtb/rockchip/overlay && \
     export KERNEL_RELEASE=$(cat /kernel/build/include/config/kernel.release) && \
     make -j$(nproc) modules_install INSTALL_MOD_PATH=/kernel/out INSTALL_MOD_STRIP=1 && \
     depmod -b /kernel/out $KERNEL_RELEASE && \

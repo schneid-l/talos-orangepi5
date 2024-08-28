@@ -47,9 +47,7 @@ func main() {
 
 type OrangePi5Installer struct{}
 
-type orangePi5ExtraOptions struct {
-	Sata bool `json:"sata"`
-}
+type orangePi5ExtraOptions struct{}
 
 func (i *OrangePi5Installer) GetOptions(extra orangePi5ExtraOptions) (overlay.Options, error) {
 	return overlay.Options{
@@ -59,14 +57,9 @@ func (i *OrangePi5Installer) GetOptions(extra orangePi5ExtraOptions) (overlay.Op
 }
 
 func (i *OrangePi5Installer) Install(options overlay.InstallOptions[orangePi5ExtraOptions]) error {
-	sataSuffix := ""
-	if options.ExtraOptions.Sata {
-		sataSuffix = "-sata"
-	}
-
 	for board := range boardDTBNames {
 		if err := copyFiles(
-			filepath.Join(options.ArtifactsPath, "/dtb/", boardDTBNames[board]+sataSuffix+".dtb"),
+			filepath.Join(options.ArtifactsPath, "/dtb/", boardDTBNames[board]+".dtb"),
 			filepath.Join(options.MountPrefix, uBootDTBDest, boardDTBNames[board]+".dtb"),
 			filepath.Join(options.MountPrefix, edk2DTBDest, boardDTBNames[board]+".dtb")); err != nil {
 			return err

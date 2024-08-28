@@ -8,8 +8,6 @@ AUTHORS ?= Louis S. <louis@schne.id>
 PUSH ?= false
 ARTIFACTS_FOLDER ?= ./out
 
-SATA ?= no
-
 HACK ?= ./hack
 
 TAG ?= $(shell git describe --tag --always --dirty)
@@ -39,17 +37,10 @@ INSTALLER_OUTPUT_TAG ?= $(TAG)
 INSTALLER_OUTPUT_IMAGE ?= $(REGISTRY_AND_USERNAME)/$(INSTALLER_OUTPUT_NAME):$(INSTALLER_OUTPUT_TAG)
 
 IMAGE_INSTALLER_NAME ?= $(NAME)
-ifeq ($(SATA),yes)
-	IMAGE_INSTALLER_NAME := $(IMAGE_INSTALLER_NAME)-sata
-endif
 IMAGE_INSTALLER_TAG ?= $(TAG)
 IMAGE_INSTALLER_IMAGE ?= $(REGISTRY_AND_USERNAME)/$(IMAGE_INSTALLER_NAME):$(IMAGE_INSTALLER_TAG)
-
 IMAGE_FILENAME ?= $(NAME)
 
-ifeq ($(SATA),yes)
-	IMAGE_FILENAME := $(IMAGE_FILENAME)-sata
-endif
 
 IMAGE_OUTPUT_KIND ?= 
 IMAGE_KIND ?= metal
@@ -60,7 +51,6 @@ IMAGER_ARGS += --overlay-name=orangepi-5
 IMAGER_ARGS += --overlay-image=$(INSTALLER_OUTPUT_IMAGE)
 IMAGER_ARGS += --output-kind=$(IMAGE_OUTPUT_KIND)
 IMAGER_ARGS += $(forach IMAGE_EXTENSION,$(IMAGE_EXTENSIONS),--system-extension-image=$(IMAGE_EXTENSION))
-IMAGER_ARGS += --overlay-option="sata=$(SATA)"
 
 INITIAL_COMMIT_SHA := $(shell git rev-list --max-parents=0 HEAD)
 SOURCE_DATE_EPOCH ?= $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
@@ -191,17 +181,12 @@ image: $(ARTIFACTS_FOLDER)
 		$(IMAGER_ARGS)
 
 .PHONY: images-metal
-images-metal: image-metal image-metal-sata
+images-metal: image-metal
 
 .PHONY: image-metal
 image-metal:
 	@$(MAKE) image && \
 		mv "$(ARTIFACTS_FOLDER)/metal-arm64.raw.zst" "$(ARTIFACTS_FOLDER)/$(strip $(IMAGE_FILENAME)).raw.zst"
-
-.PHONY: image-metal-sata
-image-metal-sata:
-	@$(MAKE) image-metal \
-		SATA=yes
 
 .PHONY: image-pxe
 image-pxe: image-kernel image-initramfs
@@ -219,7 +204,7 @@ image-initramfs:
 		IMAGE_OUTPUT_KIND="initramfs"
 
 .PHONY: images-installer
-images-installer: image-installer image-installer-sata
+images-installer: image-installer
 
 .PHONY: image-installer
 image-installer:
@@ -229,11 +214,6 @@ image-installer:
 		if $(PUSH); then \
 			crane push $(ARTIFACTS_FOLDER)/installer-arm64.tar $(IMAGE_INSTALLER_IMAGE); \
 		fi
-
-.PHONY: image-installer-sata
-image-installer-sata:
-	$(MAKE) image-installer \
-		SATA=yes
 
 ###### Clean ######
 

@@ -37,29 +37,25 @@ The device tree are included in the image at the paths required by U-Boot and ED
 
 #### Install on a drive
 
-The Talos image can be flashed on an SD card, a NVMe drive, or a SATA drive.
+The Talos image can be flashed on an SD card or a NVMe drive.
 
 You can download the latest image from the [releases page](https://github.com/si0ls/talos-orangepi5/releases).
-
-You can choose between the following images:
-- `talos-orangepi5.raw.zst`: the base image for **Orange Pi 5 (Plus)**, flashable on a **SD card, eMMC, M.2 NVMe drive, USB drive, or USB-connected SATA drive**
-- `talos-orangepi5-sata.raw.zst`: the base image for **Orange Pi 5 (Plus)** with SATA overlay applied, flashable on a **M.2 SATA drive**
 
 The image can be flashed using [Etcher](https://www.balena.io/etcher/) on Windows, macOS, or Linux or using `dd` on Linux:
 
 ```bash
-# Extract the image for the variant you want to flash
-zstd -d talos-orangepi5[-sata].raw.zst
+# Extract the image
+zstd -d talos-orangepi5.raw.zst
 
 # Flash the image
-# Replace /dev/sdX with the device of the SD card, NVMe drive, or SATA drive
+# Replace /dev/sdX with the destination device
 # You can find the device with `lsblk` or `fdisk -l`
-dd if=talos-orangepi5[-sata].raw of=/dev/sdX bs=4M status=progress
+dd if=talos-orangepi5.raw of=/dev/sdX bs=4M status=progress
 ```
 
 #### PXE Boot
 
-**This repository does not provide a PXE server**, it is up to you to set up the PXE server.
+**This repository does not provide a PXE server**, it is up to you to set up the PXE environment.
 
 The [release page](https://github.com/si0ls/talos-orangepi5/releases) provides the following files needed for PXE boot:
 
@@ -69,13 +65,13 @@ The [release page](https://github.com/si0ls/talos-orangepi5/releases) provides t
 
 ## Machine configuration
 
-Use the `ghcr.io/si0ls/talos-orangepi5` images instead of the upstream Talos Linux images. It also available with the SATA overlay with the `ghcr.io/si0ls/talos-orangepi5-sata` image.
+Use the `ghcr.io/si0ls/talos-orangepi5` image instead of the upstream Talos Linux one.
 
 ```yaml
 machine:
   install:
     disk: /dev/sda # replace with the device you want to install Talos on
-    image: ghcr.io/si0ls/talos-orangepi5[-sata]:v1.1
+    image: ghcr.io/si0ls/talos-orangepi5:v1.1
     wipe: false
 ```
 
@@ -83,7 +79,7 @@ To upgrade you machine to the latest version with `talosctl`, you can use the fo
 
 ```bash
 talosctl upgrade --nodes <node-ip> \
-      --image ghcr.io/si0ls/talos-orangepi5[-sata]:<version>
+      --image ghcr.io/si0ls/talos-orangepi5:<version>
 ```
 
 ## Build
@@ -102,12 +98,13 @@ _The detail of all the build steps and parameters can be found in the [Makefile]
 
 ## License
 
-This project is not affiliated with Xunlong, Orange Pi, Armbian, or Sidero Labs.
+This project is not affiliated with Xunlong, Orange Pi, Armbian, Collabora or Sidero Labs.
 
 The code in this repository is licensed under the Mozilla Public License Version 2.0 to respect the Talos project license.
 
 ## Special thanks
 
 - [Sidero Labs](https://www.siderolabs.com/) for the Talos project
+- [Armbian](https://www.armbian.com/) for the initial work on the Orange Pi 5
 - [Collabora](https://www.collabora.com/) for the kernel
-- [@nberlee](https://github.com/nberlee) and [@pl4nty](https://github.com/pl4nty) for the initial work on other rk3588 devices and their help ❤️
+- [@nberlee](https://github.com/nberlee) and [@pl4nty](https://github.com/pl4nty) for the initial work on other rk3588 devices for Talos and their help ❤️
