@@ -64,7 +64,7 @@ index 8380996..46c270d 100644
  const (
  	// DefaultKernelVersion is the default Linux kernel version.
 -	DefaultKernelVersion = "6.6.36-talos"
-+	DefaultKernelVersion = "6.10.0-talos-orangepi5"
++	DefaultKernelVersion = "6.11.0-rc1-talos"
  
  	// KernelModulesPath is the default path to the kernel modules without the kernel version.
  	KernelModulesPath = "/lib/modules"

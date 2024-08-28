@@ -12,7 +12,7 @@ I choose to stick to the mainline kernel to simplify the future updates and to h
 
 **⚠️ As this repo use the mainline kernel with patches, the full support of the Orange Pi 5 is not guaranteed (e.g. HDMI is not working).**
 
-- Linux kernel: v6.10 (with [Armbian patches](https://github.com/armbian/build/tree/main/patch/kernel/archive/rockchip-rk3588-6.10))
+- Linux kernel: v6.10 (from [Collabora](https://gitlab.collabora.com/hardware-enablement/rockchip-3588/linux))
 - Talos Linux: [v1.8.0-alpha.1](https://github.com/siderolabs/talos/tree/v1.8.0-alpha.1)
 
 The best effort is made to keep the overlay in sync with the upstream dependencies.
@@ -109,5 +109,5 @@ The code in this repository is licensed under the Mozilla Public License Version
 ## Special thanks
 
 - [Sidero Labs](https://www.siderolabs.com/) for the Talos project
-- [Armbian](https://www.armbian.com/) for the rk3588 kernel
+- [Collabora](https://www.collabora.com/) for the kernel
 - [@nberlee](https://github.com/nberlee) and [@pl4nty](https://github.com/pl4nty) for the initial work on other rk3588 devices and their help ❤️

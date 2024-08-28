@@ -28,6 +28,8 @@ var (
 		"swapaccount=1",
 		"irqchip.gicv3_pseudo_nmi=0",
 		"coherent_pool=2M",
+		"pcie_aspm=off",
+		"libata.force=noncq",
 	}
 
 	edk2DTBDest  = "/boot/EFI/dtb/base"
