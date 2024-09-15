@@ -1,7 +1,7 @@
 NAME ?=talos-orangepi5
 
 REGISTRY ?= ghcr.io
-USERNAME ?= si0ls
+USERNAME ?= schneid-l
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
 SOURCE ?= https://github.com/${USERNAME}/${NAME}.git
 AUTHORS ?= Louis S. <louis@schne.id>
@@ -21,10 +21,10 @@ KERNEL_OUTPUT_NAME ?= $(NAME)-kernel
 KERNEL_OUTPUT_TAG ?= $(KERNEL_TAG)-$(TAG)
 KERNEL_OUTPUT_IMAGE ?= $(REGISTRY_AND_USERNAME)/$(KERNEL_OUTPUT_NAME):$(KERNEL_OUTPUT_TAG)
 
-TALOS_TAG ?= v1.8.0-alpha.1
+TALOS_TAG ?= v1.8.0-beta.0
 TALOS_SOURCE ?= https://github.com/siderolabs/talos.git
 TALOS_VERSION ?= $(TALOS_TAG)
-TALOS_AMD64_KERNEL ?= ghcr.io/siderolabs/kernel:v1.8.0-alpha.0-34-gce49757
+TALOS_AMD64_KERNEL ?= ghcr.io/siderolabs/kernel:v1.8.0
 IMAGER_TALOS ?= talos/$(TALOS_VERSION)
 IMAGER_OUTPUT_NAME ?= $(NAME)-imager
 IMAGER_OUTPUT_TAG ?= $(TALOS_VERSION)-$(TAG)

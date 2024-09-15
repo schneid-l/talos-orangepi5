@@ -31,7 +31,7 @@ ARG VERSION
 ARG IMAGE_NAME="talos-orangepi5-installer"
 ARG IMAGE_TITLE="Talos Orange Pi 5 Installer"
 ARG IMAGE_DESCRIPTION=$IMAGE_TITLE
-ARG IMAGE_SOURCE="https://github.com/si0ls/talos-orangepi5"
+ARG IMAGE_SOURCE="https://github.com/schneid-l/talos-orangepi5"
 ARG IMAGE_AUTHORS="Louis S. <louis@schne.id>"
 ARG IMAGE_VENDOR=$IMAGE_AUTHORS
 ARG IMAGE_VERSION=$VERSION

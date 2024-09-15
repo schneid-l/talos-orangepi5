@@ -1,18 +1,18 @@
-From 4e7a4115ea87965b60519d9353fbea8074fecf67 Mon Sep 17 00:00:00 2001
+From 6f01355e3b72f73b6a25913ff7ec526654389c3e Mon Sep 17 00:00:00 2001
 From: Louis SCHNEIDER <louis@schne.id>
-Date: Mon, 22 Jul 2024 18:12:08 +0200
-Subject: [PATCH] use rk3588 v6.10 kernel
+Date: Sun, 15 Sep 2024 15:41:42 +0200
+Subject: [PATCH] use rk3588 v6.11 kernel
 
 ---
- hack/modules-arm64.txt               | 33 ----------------------------
+ hack/modules-arm64.txt               | 36 ----------------------------
  pkg/machinery/constants/constants.go |  2 +-
- 2 files changed, 1 insertion(+), 34 deletions(-)
+ 2 files changed, 1 insertion(+), 37 deletions(-)
 
 diff --git a/hack/modules-arm64.txt b/hack/modules-arm64.txt
-index 3b07203..b5c35b8 100644
+index d3fcd46..4bfb7b6 100644
 --- a/hack/modules-arm64.txt
 +++ b/hack/modules-arm64.txt
-@@ -3,42 +3,9 @@ kernel/crypto/async_tx/async_pq.ko
+@@ -3,34 +3,8 @@ kernel/crypto/async_tx/async_pq.ko
  kernel/crypto/async_tx/async_raid6_recov.ko
  kernel/crypto/async_tx/async_tx.ko
  kernel/crypto/async_tx/async_xor.ko
@@ -45,6 +45,15 @@ index 3b07203..b5c35b8 100644
 -kernel/drivers/net/ethernet/sfc/sfc.ko
 -kernel/drivers/net/ethernet/sfc/siena/sfc-siena.ko
  kernel/drivers/net/vrf.ko
+ kernel/drivers/nvme/host/nvme-rdma.ko
+ kernel/drivers/nvme/target/nvme-loop.ko
+@@ -38,16 +12,6 @@ kernel/drivers/nvme/target/nvmet-fc.ko
+ kernel/drivers/nvme/target/nvmet.ko
+ kernel/drivers/nvme/target/nvmet-rdma.ko
+ kernel/drivers/nvme/target/nvmet-tcp.ko
+-kernel/drivers/scsi/mpi3mr/mpi3mr.ko
+-kernel/drivers/uio/uio.ko
+-kernel/drivers/uio/uio_pci_generic.ko
 -kernel/drivers/vfio/pci/vfio-pci-core.ko
 -kernel/drivers/vfio/pci/vfio-pci.ko
 -kernel/drivers/vfio/vfio_iommu_type1.ko
@@ -56,17 +65,18 @@ index 3b07203..b5c35b8 100644
  kernel/net/openvswitch/vport-gre.ko
  kernel/net/tls/tls.ko
 diff --git a/pkg/machinery/constants/constants.go b/pkg/machinery/constants/constants.go
-index 8380996..46c270d 100644
+index 0d7b938..bd8a65f 100644
 --- a/pkg/machinery/constants/constants.go
 +++ b/pkg/machinery/constants/constants.go
 @@ -14,7 +14,7 @@ import (
  
  const (
  	// DefaultKernelVersion is the default Linux kernel version.
--	DefaultKernelVersion = "6.6.36-talos"
+-	DefaultKernelVersion = "6.6.49-talos"
 +	DefaultKernelVersion = "6.11.0-rc1-talos"
  
  	// KernelModulesPath is the default path to the kernel modules without the kernel version.
  	KernelModulesPath = "/lib/modules"
 -- 
-2.45.2
+2.46.0
+

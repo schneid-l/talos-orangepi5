@@ -1,6 +1,6 @@
 # Talos for Orange Pi 5
 
-[![Build Talos Linux for Orange Pi 5](https://github.com/si0ls/talos-orangepi5/actions/workflows/build-talos-opi5.yaml/badge.svg)](https://github.com/si0ls/talos-orangepi5/actions/workflows/build-talos-opi5.yaml)
+[![Build Talos Linux for Orange Pi 5](https://github.com/schneid-l/talos-orangepi5/actions/workflows/build-talos-opi5.yaml/badge.svg)](https://github.com/schneid-l/talos-orangepi5/actions/workflows/build-talos-opi5.yaml)
 
 This repository provides Talos Linux support for the Orange Pi 5 and Orange Pi 5 Plus.
 
@@ -26,7 +26,7 @@ The images provided in this repository do not includes a bootloader as the Orang
 
 The images provided in this repository are made to be booted with U-Boot or EDK2 UEFI firmware.
 
-I provide U-Boot builds for Orange Pi 5 (and variants) in the [u-boot-orangepi5 repository](https://github.com/si0ls/u-boot-orangepi5).
+I provide U-Boot builds for Orange Pi 5 (and variants) in the [u-boot-orangepi5 repository](https://github.com/schneid-l/u-boot-orangepi5).
 The informations to flash the bootloader are described in the repository README.
 
 You can also flash [EDK2 UEFI firmware for Rockchip RK3588 platforms](https://github.com/edk2-porting/edk2-rk3588) (not tested).
@@ -39,7 +39,7 @@ The device tree are included in the image at the paths required by U-Boot and ED
 
 The Talos image can be flashed on an SD card or a NVMe drive.
 
-You can download the latest image from the [releases page](https://github.com/si0ls/talos-orangepi5/releases).
+You can download the latest image from the [releases page](https://github.com/schneid-l/talos-orangepi5/releases).
 
 The image can be flashed using [Etcher](https://www.balena.io/etcher/) on Windows, macOS, or Linux or using `dd` on Linux:
 
@@ -57,7 +57,7 @@ dd if=talos-orangepi5.raw of=/dev/sdX bs=4M status=progress
 
 **This repository does not provide a PXE server**, it is up to you to set up the PXE environment.
 
-The [release page](https://github.com/si0ls/talos-orangepi5/releases) provides the following files needed for PXE boot:
+The [release page](https://github.com/schneid-l/talos-orangepi5/releases) provides the following files needed for PXE boot:
 
 - `kernel-arm64` (the kernel)
 - `initramfs-metal-arm64.xz` (the initramfs)
@@ -65,13 +65,13 @@ The [release page](https://github.com/si0ls/talos-orangepi5/releases) provides t
 
 ## Machine configuration
 
-Use the `ghcr.io/si0ls/talos-orangepi5` image instead of the upstream Talos Linux one.
+Use the `ghcr.io/schneid-l/talos-orangepi5` image instead of the upstream Talos Linux one.
 
 ```yaml
 machine:
   install:
     disk: /dev/sda # replace with the device you want to install Talos on
-    image: ghcr.io/si0ls/talos-orangepi5:v1.1
+    image: ghcr.io/schneid-l/talos-orangepi5:v1.1
     wipe: false
 ```
 
@@ -79,7 +79,7 @@ To upgrade you machine to the latest version with `talosctl`, you can use the fo
 
 ```bash
 talosctl upgrade --nodes <node-ip> \
-      --image ghcr.io/si0ls/talos-orangepi5:<version>
+      --image ghcr.io/schneid-l/talos-orangepi5:<version>
 ```
 
 ## Build
@@ -87,7 +87,7 @@ talosctl upgrade --nodes <node-ip> \
 Clone the repository and build Talos Linux for Orange Pi 5:
 
 ```bash
-git clone https://github.com/si0ls/talos-orangepi5.git
+git clone https://github.com/schneid-l/talos-orangepi5.git
 cd talos-orangepi5
 make
 ```
