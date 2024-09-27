@@ -1,7 +1,7 @@
-From 6f01355e3b72f73b6a25913ff7ec526654389c3e Mon Sep 17 00:00:00 2001
+From dc562be6ecf8315491aa5536f4cf8611b846b3a3 Mon Sep 17 00:00:00 2001
 From: Louis SCHNEIDER <louis@schne.id>
-Date: Sun, 15 Sep 2024 15:41:42 +0200
-Subject: [PATCH] use rk3588 v6.11 kernel
+Date: Fri, 27 Sep 2024 19:27:55 +0200
+Subject: [PATCH] update Talos Linux kernel for rk3588
 
 ---
  hack/modules-arm64.txt               | 36 ----------------------------
@@ -65,18 +65,18 @@ index d3fcd46..4bfb7b6 100644
  kernel/net/openvswitch/vport-gre.ko
  kernel/net/tls/tls.ko
 diff --git a/pkg/machinery/constants/constants.go b/pkg/machinery/constants/constants.go
-index 0d7b938..bd8a65f 100644
+index ac1fa14..720adc0 100644
 --- a/pkg/machinery/constants/constants.go
 +++ b/pkg/machinery/constants/constants.go
 @@ -14,7 +14,7 @@ import (
  
  const (
  	// DefaultKernelVersion is the default Linux kernel version.
--	DefaultKernelVersion = "6.6.51-talos"
+-	DefaultKernelVersion = "6.6.52-talos"
 +	DefaultKernelVersion = "6.11.0-rc1-talos"
  
  	// KernelModulesPath is the default path to the kernel modules without the kernel version.
  	KernelModulesPath = "/lib/modules"
 -- 
-2.46.0
+2.46.2
 
