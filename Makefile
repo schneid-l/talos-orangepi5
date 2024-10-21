@@ -12,7 +12,7 @@ HACK ?= ./hack
 
 TAG ?= $(shell git describe --tag --always --dirty)
 
-KERNEL_TAG ?= 6.11-rc1
+KERNEL_TAG ?= 6.12-rc1
 KERNEL_SOURCE ?= https://gitlab.collabora.com/hardware-enablement/rockchip-3588/linux/-/archive/rk3588/linux-rk3588.tar.gz
 KERNEL_TAG_SEMVER ?= $(shell echo $(KERNEL_TAG) | sed 's/^\([0-9]*\.[0-9]*\)$$/\1.0/')
 KERNEL_TAINT ?= -$(NAME)
