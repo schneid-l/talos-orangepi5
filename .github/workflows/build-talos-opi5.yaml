@@ -42,7 +42,6 @@ jobs:
         id: cache-kernel-build
         uses: actions/cache@v4
         with:
-          save-always: true
           path: kernel-build
           key: kernel-${{ steps.depver.outputs.KERNEL_TAG }}-${{ github.ref_name }}-${{ hashFiles('kernel/*') }}-build
 
@@ -123,7 +122,6 @@ jobs:
         id: cache-gomod
         uses: actions/cache@v4
         with:
-          save-always: true
           path: installer-gomod
           key: installer-gomod-${{ github.ref_name }}-${{ hashFiles('installer/*') }}-build
 
@@ -131,7 +129,6 @@ jobs:
         id: cache-go
         uses: actions/cache@v4
         with:
-          save-always: true
           path: installer-go
           key: installer-go-${{ github.ref_name }}-${{ hashFiles('installer/*') }}-build
 
