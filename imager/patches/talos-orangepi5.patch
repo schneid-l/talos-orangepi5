@@ -1,15 +1,15 @@
-From dc562be6ecf8315491aa5536f4cf8611b846b3a3 Mon Sep 17 00:00:00 2001
+From 79f2e58ae63256865aed89e48e2806396c2c77d6 Mon Sep 17 00:00:00 2001
 From: Louis SCHNEIDER <louis@schne.id>
-Date: Fri, 27 Sep 2024 19:27:55 +0200
-Subject: [PATCH] update Talos Linux kernel for rk3588
+Date: Wed, 23 Oct 2024 14:54:34 +0200
+Subject: [PATCH] [PATCH] update Talos Linux kernel for rk3588
 
 ---
- hack/modules-arm64.txt               | 36 ----------------------------
+ hack/modules-arm64.txt               | 40 ----------------------------
  pkg/machinery/constants/constants.go |  2 +-
- 2 files changed, 1 insertion(+), 37 deletions(-)
+ 2 files changed, 1 insertion(+), 41 deletions(-)
 
 diff --git a/hack/modules-arm64.txt b/hack/modules-arm64.txt
-index d3fcd46..4bfb7b6 100644
+index 9e836d8..40471d1 100644
 --- a/hack/modules-arm64.txt
 +++ b/hack/modules-arm64.txt
 @@ -3,34 +3,8 @@ kernel/crypto/async_tx/async_pq.ko
@@ -47,13 +47,17 @@ index d3fcd46..4bfb7b6 100644
  kernel/drivers/net/vrf.ko
  kernel/drivers/nvme/host/nvme-rdma.ko
  kernel/drivers/nvme/target/nvme-loop.ko
-@@ -38,16 +12,6 @@ kernel/drivers/nvme/target/nvmet-fc.ko
- kernel/drivers/nvme/target/nvmet.ko
+@@ -38,20 +12,6 @@ kernel/drivers/nvme/target/nvmet-fc.ko
  kernel/drivers/nvme/target/nvmet-rdma.ko
  kernel/drivers/nvme/target/nvmet-tcp.ko
+ kernel/drivers/nvme/target/nvmet.ko
+-kernel/drivers/scsi/fcoe/libfcoe.ko
+-kernel/drivers/scsi/libfc/libfc.ko
+-kernel/drivers/scsi/lpfc/lpfc.ko
 -kernel/drivers/scsi/mpi3mr/mpi3mr.ko
--kernel/drivers/uio/uio.ko
+-kernel/drivers/scsi/qedf/qedf.ko
 -kernel/drivers/uio/uio_pci_generic.ko
+-kernel/drivers/uio/uio.ko
 -kernel/drivers/vfio/pci/vfio-pci-core.ko
 -kernel/drivers/vfio/pci/vfio-pci.ko
 -kernel/drivers/vfio/vfio_iommu_type1.ko
@@ -65,14 +69,14 @@ index d3fcd46..4bfb7b6 100644
  kernel/net/openvswitch/vport-gre.ko
  kernel/net/tls/tls.ko
 diff --git a/pkg/machinery/constants/constants.go b/pkg/machinery/constants/constants.go
-index ac1fa14..720adc0 100644
+index 5a35f1c..d8e246c 100644
 --- a/pkg/machinery/constants/constants.go
 +++ b/pkg/machinery/constants/constants.go
 @@ -14,7 +14,7 @@ import (
  
  const (
  	// DefaultKernelVersion is the default Linux kernel version.
--	DefaultKernelVersion = "6.6.52-talos"
+-	DefaultKernelVersion = "6.6.57-talos"
 +	DefaultKernelVersion = "6.12.0-rc1-talos"
  
  	// KernelModulesPath is the default path to the kernel modules without the kernel version.

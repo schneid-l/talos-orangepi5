@@ -21,10 +21,10 @@ KERNEL_OUTPUT_NAME ?= $(NAME)-kernel
 KERNEL_OUTPUT_TAG ?= $(KERNEL_TAG)-$(TAG)
 KERNEL_OUTPUT_IMAGE ?= $(REGISTRY_AND_USERNAME)/$(KERNEL_OUTPUT_NAME):$(KERNEL_OUTPUT_TAG)
 
-TALOS_TAG ?= v1.8.0
+TALOS_TAG ?= v1.9.0-alpha.0
 TALOS_SOURCE ?= https://github.com/siderolabs/talos.git
 TALOS_VERSION ?= $(TALOS_TAG)
-TALOS_AMD64_KERNEL ?= ghcr.io/siderolabs/kernel:v1.8.0-8-gdf1a1a5
+TALOS_AMD64_KERNEL ?= ghcr.io/siderolabs/kernel:v1.9.0-alpha.0-26-gc9282c8
 IMAGER_TALOS ?= talos/$(TALOS_VERSION)
 IMAGER_OUTPUT_NAME ?= $(NAME)-imager
 IMAGER_OUTPUT_TAG ?= $(TALOS_VERSION)-$(TAG)
