@@ -1,3 +1,12 @@
+# This repository is archived 🗃️
+
+> [!WARNING]  
+> This repository will not be maintained anymore!
+
+Talos Linux [now "officially" supports Orange Pi 5](https://github.com/siderolabs/sbc-rockchip) thanks to [@LaurinStreng](https://github.com/LaurinStreng) :tada:
+
+---
+
 # Talos for Orange Pi 5
 
 [![Build Talos Linux for Orange Pi 5](https://github.com/schneid-l/talos-orangepi5/actions/workflows/build-talos-opi5.yaml/badge.svg)](https://github.com/schneid-l/talos-orangepi5/actions/workflows/build-talos-opi5.yaml)
